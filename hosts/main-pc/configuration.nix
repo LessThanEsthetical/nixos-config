@@ -22,6 +22,7 @@
     settings = {
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
+      use-xdg-base-directories = true;
     };
   };
 
@@ -43,6 +44,14 @@
 
     openssh = {
       enable = true;
+
+      ports = [ 3620 ];
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no";
+	      AllowUsers = [ "furina" ];
+      };
     };
 
     unbound = {
@@ -51,6 +60,8 @@
 
     pipewire = {
       enable = true;
+      wireplumber.enable = true;
+      alsa.enable = true;
       pulse.enable = true;
     };
   };
@@ -60,35 +71,48 @@
     networkmanager.enable = true;
     #networkmanager.dns = "dnsmasq";
 
-    firewall.enable = true;
-    firewall.allowedTCPPorts = [ 22 ];
+    #firewall.enable = true;
+    #firewall.allowedTCPPorts = [ 22 ];
     resolvconf.enable = true;
     nftables.enable = true;
     nftables.flushRuleset = true;
   };
 
-  time.timeZone = "Europe/Warsaw";
+  time.timeZone = "Asia/Tokyo";
 
   users = {
     defaultUserShell = pkgs.zsh;
 
     users.furina = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" "seat" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "networkmanager" "seat" ];
+      openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ2Ld4FLFrLbmwFVt3rmOAeaCgyNqV4eXFSJFzMZjVAU astolfo@moegoofy" ];
     };
   };
 
   programs.zsh.enable = true;
   programs.hyprland = {
-		enable = true;
-		package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-		portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-	};
-  environment.systemPackages = with pkgs; [
-    neovim
-    wget
-    git
-  ];
+    enable = true;
+    #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  };
+
+  security.pam.services.hyprlock.enable = true;
+
+  environment = {
+    systemPackages = with pkgs; [
+      neovim
+      wget
+      git
+    ];
+
+    wordlist.enable = true;
+    variables = { 
+      TERMINFO = "\"$XDG_DATA_HOME\"/terminfo";
+      TERMINFO_DIRS = "\"$XDG_DATA_HOME\"/terminfo:/usr/share/terminfo";
+      W3M_DIR = "\"$XDG_STATE_HOME\"/w3m";
+    };
+  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
@@ -107,5 +131,5 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "25.11"; # Did you read the comment?
+  system.stateVersion = "26.05"; # Did you read the comment?
 }

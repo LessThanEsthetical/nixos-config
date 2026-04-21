@@ -19,6 +19,7 @@
 		less
 		gnused
 		gawk
+		wl-clipboard-rs
 
 		# Web utilites
 		curl
