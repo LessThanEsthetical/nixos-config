@@ -22,15 +22,28 @@
       url = "github:hyprwm/Hyprland";
       #inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  # Later add other entries, this one is for PC for now
-  outputs = inputs@{ self, nixpkgs, niri, hyprland, home-manager, ... }: { 
-    # Add niri when it'll be possible
+  # Later add other entries, this one is for PC and laptop for now
+  outputs = inputs@{ 
+    self, 
+    nixpkgs, 
+    disko, 
+    niri, 
+    hyprland, 
+    home-manager, 
+    ... }: 
+    { 
     nixosConfigurations.main-pc = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         ./hosts/main-pc/configuration.nix
         #./common/niri.nix
+        disko.nixosModules.disko
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
