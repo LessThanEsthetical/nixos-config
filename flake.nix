@@ -41,14 +41,14 @@
     nixosConfigurations.main-pc = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./hosts/main-pc/configuration.nix
+        ./main-pc/configuration.nix
         #./common/niri.nix
         disko.nixosModules.disko
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.furina.imports = [ ./hosts/main-pc/home.nix ./common/misc.nix ./common/hyprland.nix ];
+            home-manager.users.furina.imports = [ ./main-pc/home.nix ]; 
           }
       ];   
     };

@@ -1,18 +1,42 @@
 { inputs, config, pkgs, ... }:
 
 {
+
+  imports = [ 
+    ../common/hyprland.nix
+    ../common/misc.nix
+    #../common/newsboat.nix
+    ../common/mpv.nix
+    ../common/starship.nix
+  ];
+
   home = {
     username = "furina";
     homeDirectory = "/home/furina";
     shell.enableZshIntegration = true;
     preferXdgDirectories = true;
   };
+
   services = { 
     gammastep = {
       enable = true;
       provider = "manual";
       latitude = 52.2;
       longitude = 21.0;
+    };
+  };
+
+  fonts.fontconfig = {
+    enable = true;
+
+    hinting = "slight";
+    subpixelRendering = "rgb";
+    antialiasing = true;
+
+    defaultFonts = {
+      emoji = [ "pkgs.font-awesome" ];
+      monospace = [ "pkgs.nerd-fonts.jetbrains-mono" ];
+      sansSerif = [ "pkgs.inter-nerdfont" ];
     };
   };
 
@@ -75,6 +99,7 @@
       terminal = "tmux-256color";
       keyMode = "vi";
       escapeTime = 0;
+      newSession = true;
     };
 
     firefox = {

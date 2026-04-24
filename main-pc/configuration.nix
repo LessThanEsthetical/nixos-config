@@ -13,8 +13,7 @@
     };
   };
 
-  # Enable once set on real PC
-  #hardware.cpu.intel.updateMicrocode = true;
+  hardware.cpu.intel.updateMicrocode = true;
 
   nix = {
     optimise.automatic = true;
@@ -78,6 +77,7 @@
     nftables.flushRuleset = true;
   };
 
+  # Why yes, I'm influenced
   time.timeZone = "Asia/Tokyo";
 
   users = {
@@ -97,21 +97,27 @@
     #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
-  security.pam.services.hyprlock.enable = true;
+  security = {
+    pam.services.hyprlock.enable = true;
+
+    # Enable memory safe Rust written sudo
+    sudo.enable = false;
+    sudo-rs = {
+      enable = true;
+
+      execWheelOnly = true;
+    };
+  };
 
   environment = {
     systemPackages = with pkgs; [
       neovim
+      micro
       wget
       git
     ];
 
     wordlist.enable = true;
-    variables = { 
-      TERMINFO = "\"$XDG_DATA_HOME\"/terminfo";
-      TERMINFO_DIRS = "\"$XDG_DATA_HOME\"/terminfo:/usr/share/terminfo";
-      W3M_DIR = "\"$XDG_STATE_HOME\"/w3m";
-    };
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
