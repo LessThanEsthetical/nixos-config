@@ -4,7 +4,7 @@
   imports = [
     ./dunst.nix
     ./rofi.nix
-    ./polybar.nix
+    ./waybar.nix
   ];
 
   #wayland.windowManager.hyprland = {

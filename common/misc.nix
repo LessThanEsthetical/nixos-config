@@ -16,6 +16,7 @@
 		# Working with text
 		ripgrep
 		jq
+    csvkit
 		less
 		gnused
 		gawk
@@ -42,5 +43,8 @@
 		pciutils
 		usbutils
 		coreutils
+
+    # Fonts
+    nerd-fonts.fira-code
 	];
 }

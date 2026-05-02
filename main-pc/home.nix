@@ -5,9 +5,10 @@
   imports = [ 
     ../common/hyprland.nix
     ../common/misc.nix
-    #../common/newsboat.nix
     ../common/mpv.nix
     ../common/starship.nix
+    ../common/tmux.nix
+    ../common/firefox.nix
   ];
 
   home = {
@@ -44,11 +45,13 @@
     enable = true;
 
     autostart.enable = true;
-    userDirs.createDirectories = true;
-    userDirs.extraConfig = { BLENDER = "${config.home.homeDirectory}/Blender"; };
     mimeApps.enable = true;
-    userDirs.enable = true;
+    userDirs = { 
+      enable = true;
 
+      createDirectories = true;
+      extraConfig = { BLENDER = "${config.home.homeDirectory}/Blender"; };
+    };
     portal = {
       enable = true;
 
@@ -67,12 +70,38 @@
       };
     };
 
+    nh = {
+      enable = true;
+
+      flake = "/home/furina/nixos-conf";
+      clean = {
+        enable = false;
+        extraArgs = "--keep";
+      };
+    };
+
     kitty = {
       enable = true;
+
+      enableGitIntegration = true;  
+      themeFile = "tokyo_night_storm";
+      shellIntegration.enableZshIntegration = true;
+      font = {
+        #package = [ pkgs.nerd-fonts.fira-code ];
+        name = "FiraCode Nerd Font Mono";
+        size = 11;
+      };
+      settings = {
+        cursor_shape = "underline";
+        cursor_trail = 1;
+        enable_audio_bell = "no";
+        background_opacity = 0.75;
+      };
     };
   
     zsh = {
       enable = true;
+      
       autosuggestion.enable = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
@@ -84,38 +113,17 @@
 
       shellAliases = {
         check = "fastfetch";
+        stfu = "shutdown -P 0";
       };
     };
 
-    tmux = {
-      enable = true;
-
-      aggressiveResize = true;
-      baseIndex = 1;
-      clock24 = true;
-      mouse = true;
-      historyLimit = 10000;
-      secureSocket = true;
-      terminal = "tmux-256color";
-      keyMode = "vi";
-      escapeTime = 0;
-      newSession = true;
-    };
-
-    firefox = {
-      enable = true;
-      #arkenfox= {
-        #enable = true;
-        #version = "140.0";
-      #};
-
-      profiles.furina = {
-        name = "furina";
-        search.default = "ddg";
-      };
-    };
     neovim = {
       enable = true;
+
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
       initLua = ''
         local o = vim.o
         
@@ -127,15 +135,32 @@
         
 	      vim.cmd("colorscheme industry")
       '';
-
-      defaultEditor = true;
     };
     yt-dlp = {
       enable = true;
       
       settings = {
+        paths = "home:${config.xdg.userDirs.download}/webvids";
+        output = "%(extractor)s/%(title)s [%(id)s].$(ext)s";
+
+        force-keyframes-at-cuts = true;
+        sponsorblock-mark = "all";
+        sponsorblock-remove = "sponsor";
+        external-downloader = "aria2c";
+        no-write-comments = true;
+        convert-thumbnails = "png";
+        sub-langs = "all";
+        sub-format = "best";
+        no-windows-filenames = true;
+
         progress = true;
         console-title = true;
+
+        embed-thumbnail = true;
+        embed-metadata = true;
+        embed-info-json = true;
+        embed-chapters = true;
+        embed-subs = true;
       };
     };
   };

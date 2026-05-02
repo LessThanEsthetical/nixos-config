@@ -16,6 +16,7 @@
   hardware.cpu.intel.updateMicrocode = true;
 
   nix = {
+    package = pkgs.lixPackageSets.latest.lix;
     optimise.automatic = true;
 
     settings = {

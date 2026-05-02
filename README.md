@@ -5,6 +5,8 @@ Those are made inside QEMU, later should setup all this on PC and laptop.
   - Particulary touch onto waybar, dunst and Kitty terminal
   - Wallpapers also
 - Make Niri setup
+- Rewrite and reorganize flakes to use dendritic pattern
+  - Implement flake-parts
 - Finish Firefox setup
   - Fetch specific bookmarks
   - Apply arkenfox user.js + custom user_overrides.js
@@ -12,7 +14,7 @@ Those are made inside QEMU, later should setup all this on PC and laptop.
 - Create configurations for server as well
   - Particularly for Raspberry Pi and VPS
 - Somehow harden setup
-  - SELinux?
+  - nix-mineral?
 - Use UEFI + Secure Boot
   - Maybe implement usage of TPM 2.0 module
 - Implement disko
