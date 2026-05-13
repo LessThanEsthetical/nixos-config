@@ -43,6 +43,7 @@
 		pciutils
 		usbutils
 		coreutils
+    comma
 
     # Fonts
     nerd-fonts.fira-code

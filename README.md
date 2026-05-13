@@ -1,31 +1,33 @@
-Those are made inside QEMU, later should setup all this on PC and laptop. 
+> Those are made inside QEMU, later should setup all this on PC and laptop. 
 
 ## Plans
-- Finish Hyprland setup
+- [ ] Make Niri setup
   - Particulary touch onto waybar, dunst and Kitty terminal
   - Wallpapers also
-- Make Niri setup
-- Rewrite and reorganize flakes to use dendritic pattern
-  - Implement flake-parts
-- Finish Firefox setup
-  - Fetch specific bookmarks
-  - Apply arkenfox user.js + custom user_overrides.js
-  - Add uBlock Origin extension + custom filters and settings
-- Create configurations for server as well
-  - Particularly for Raspberry Pi and VPS
-- Somehow harden setup
-  - nix-mineral?
-- Use UEFI + Secure Boot
-  - Maybe implement usage of TPM 2.0 module
-- Implement disko
-  - Switch from ext4 to btrfs
-    - Backups?
-  - Use LVM
-  - Add LUKS
-  - Impermanence module sounds fun
+- [ ] Rewrite and reorganize flakes to use [dendritic pattern](https://discourse.nixos.org/t/the-dendritic-pattern/61271)
+  - Implement flake-parts?
+- [ ] Finish Firefox setup
+  - [ ] Fetch specific bookmarks
+  - [ ] Apply [arkenfox's user.js](https://github.com/HeitorAugustoLN/arkenfox-nix) + custom user_overrides.js
+  - [ ] Add uBlock Origin extension + custom filters and settings
+- [ ] Create configurations for servers as well
+  - [ ] Raspberry Pi
+  - [ ] VPS 
+- [ ] Somehow harden setup
+  - [nix-mineral](https://github.com/cynicsketch/nix-mineral)?
+- [ ] Harden bootloading chain
+  - [ ] Implement TPM 2.0 module
+  - [x] Use UEFI instead of BIOS
+  - [Lanzaboote](https://github.com/nix-community/lanzaboote) for Secure Boot?
+- [ ] Implement [disko](https://github.com/nix-community/disko)
+  - [ ] Switch from ext4 to btrfs
+    - Backups with snapshots?
+  - [ ] Use LVM-on-LUKS
+  - [ ] [Impermanence](https://github.com/nix-community/impermanence) module sounds fun
   - Use swap as file instead of partition?
-- Use sops-nix for passwords, API keys and personal text files
+- [ ] Use [sops-nix](https://github.com/Mic92/sops-nix) for passwords, API keys and personal text files
+- [ ] \(Optionally) Add KDE Plasma entry
+- [ ] \(Optionally) Check for network settings
+- [ ] \(Optionally) Customize GRUB or replace it with something else ([Limine](https://github.com/Limine-Bootloader/Limine)?)
+- [ ] \(Optionally) Finish Hyprland setup
 - Steam?
-- (Optionally) Add KDE Plasma entry
-- (Optionally) Check for network settings
-- (Optionally) Customize GRUB or replace it with something else
