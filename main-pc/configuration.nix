@@ -6,10 +6,11 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
 
+    loader.efi.canTouchEfiVariables = true;
     loader.grub = {
       enable = true;
-      device = "/dev/sda";
-      # Set to "nodev" once you move to EFI
+      device = "nodev";
+      efiSupport = true;
     };
   };
 
