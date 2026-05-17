@@ -26,8 +26,10 @@
   - [ ] [Impermanence](https://github.com/nix-community/impermanence) module sounds fun
   - Use swap as file instead of partition?
 - [ ] Use [sops-nix](https://github.com/Mic92/sops-nix) for passwords, API keys and personal text files
+- [ ] Use [NVF](https://github.com/NotAShelf/nvf) for ultimate Neovim configuration
+  - Similar to Emacs?
 - [ ] \(Optionally) Add KDE Plasma entry
 - [ ] \(Optionally) Check for network settings
 - [ ] \(Optionally) Customize GRUB or replace it with something else ([Limine](https://github.com/Limine-Bootloader/Limine)?)
-- [ ] \(Optionally) Finish Hyprland setup
+- [ ] \(Optionally) Make Hyprland setup
 - Steam?
