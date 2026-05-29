@@ -4,8 +4,9 @@
 - [ ] Make Niri setup
   - Particulary touch onto waybar, dunst and Kitty terminal
   - Wallpapers also
-- [ ] Rewrite and reorganize flakes to use [dendritic pattern](https://discourse.nixos.org/t/the-dendritic-pattern/61271)
-  - Implement flake-parts?
+- [x] Rewrite and reorganize flakes to use [dendritic pattern](https://discourse.nixos.org/t/the-dendritic-pattern/61271)
+  - [x] Implement flake-parts
+  - It may be clunky, but at least it works
 - [ ] Finish Firefox setup
   - [ ] Fetch specific bookmarks
   - [ ] Apply [arkenfox's user.js](https://github.com/HeitorAugustoLN/arkenfox-nix) + custom user_overrides.js
