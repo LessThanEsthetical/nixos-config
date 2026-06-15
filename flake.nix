@@ -14,16 +14,21 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     #arkenfox = {
       #url = "github:dwarfmaster/arkenfox-nixos/main";
       #inputs.nixpkgs.follows = "nixpkgs";
     #};
     # Figure out later to enable user.js
     
-    #niri = {
-      #url = "github:sodiboo/niri-flake";
-      #inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     #hyprland = {
       #url = "github:hyprwm/Hyprland";

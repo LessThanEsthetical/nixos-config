@@ -1,8 +1,8 @@
 {
-  flake.nixosModules.conf = { inputs, self, pkgs, config, lib, withSystem, modulesPath, ... }: {
+  flake.nixosModules.conf = { inputs, pkgs, modulesPath, ... }: {
     imports = [ "${modulesPath}/profiles/qemu-guest.nix" ];
-#modules = [ diskoConfigurations.diskopc ];
     boot = {
+      binfmt.emulatedSystems = [ "aarch64-linux" ];
       kernelPackages = pkgs.linuxPackages_zen;
 
       loader.efi.canTouchEfiVariables = true;

@@ -1,4 +1,4 @@
-{ self, inputs, home-manager, ... }:
+{ self, inputs, ... }:
 
 {
   flake.nixosConfigurations.main-pc = inputs.nixpkgs.lib.nixosSystem {

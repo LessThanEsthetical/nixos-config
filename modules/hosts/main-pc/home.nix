@@ -4,7 +4,7 @@
   imports = [ inputs.home-manager.flakeModules.home-manager ];
 
   flake.homeModules.hm = { config, pkgs, ... }: {
-    imports = with self.homeModules; [ list shell mpv ];
+    imports = with self.homeModules; [ list shell mpv niri ];
     home = {
       username = "furina";
       homeDirectory = "/home/furina";
@@ -46,18 +46,13 @@
 
       autostart.enable = true;
       mimeApps.enable = true;
+      configFile."mimeapps.list".force = true;
       userDirs = { 
         enable = true;
 
         createDirectories = true;
         setSessionVariables = true;
         extraConfig = { BLENDER = "${config.home.homeDirectory}/Blender"; };
-      };
-      portal = {
-        enable = true;
-
-        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-        xdgOpenUsePortal = true;
       };
     };
 
@@ -124,7 +119,7 @@
 
         settings = {
           paths = "home:${config.xdg.userDirs.download}/webvids";
-          output = "%(extractor)s/%(title)s [%(id)s].$(ext)s";
+          output = "%(extractor)s/%(title)s [%(id)s].%(ext)s";
 
           force-keyframes-at-cuts = true;
           sponsorblock-mark = "all";
