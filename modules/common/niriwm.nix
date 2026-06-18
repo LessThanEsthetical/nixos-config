@@ -17,6 +17,7 @@
           "Mod+Shift+E".action.quit.skip-confirmation = false;
           "Mod+Shift+P".action.power-off-monitors = [];
           "Mod+Q".action.close-window = [];
+          "Mod+O".action.toggle-overview = [];
           "Mod+T".action.spawn = "kitty";
           "Mod+D".action.spawn = "fuzzel";
           "Super+L".action.spawn = "swaylock";
@@ -105,17 +106,27 @@
           "Mod+Ctrl+8".action.move-column-to-workspace = 8;
           "Mod+Ctrl+9".action.move-column-to-workspace = 9;
 
+          "Mod+BracketLeft".action.consume-or-expel-window-left = [];
+          "Mod+BracketRight".action.consume-or-expel-window-right = [];
           "Mod+Comma".action.consume-window-into-column = [];
           "Mod+Period".action.expel-window-from-column = [];
           "Mod+R".action.switch-preset-column-width = [];
+          "Mod+Shift+R".action.switch-preset-column-width-back = [];
+          "Mod+Ctrl+R".action.switch-preset-window-height = [];
+          "Mod+Ctrl+Shift+R".action.reset-window-height = [];
           "Mod+F".action.maximize-column = [];
           "Mod+Shift+F".action.fullscreen-window = [];
           "Mod+C".action.center-column = [];
+          "Mod+Ctrl+C".action.center-visible-columns = [];
+          "Mod+M".action.maximize-window-to-edges = [];
+          "Mod+W".action.toggle-column-tabbed-display = [];
+          "Mod+V".action.toggle-window-floating = [];
+          "Mod+Shift+V".action.switch-focus-between-floating-and-tiling = [];
 
           "Mod+Minus".action.set-column-width = "-10%";
-          "Mod+Plus".action.set-column-width = "+10%";
+          "Mod+Equal".action.set-column-width = "+10%";
           "Mod+Shift+Minus".action.set-window-height = "-10%";
-          "Mod+Shift+Plus".action.set-window-height = "+10%";
+          "Mod+Shift+Equal".action.set-window-height = "+10%";
         };
       };
     };
