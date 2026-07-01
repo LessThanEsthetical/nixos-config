@@ -1,7 +1,9 @@
+{ ... }:
 
 {
   flake.homeModules.list = { pkgs, ... }: {
-    home.packages = with pkgs; [
+    home.packages = builtins.attrValues {
+    inherit (pkgs)
 # Tape archiving
         zip
         xz
@@ -16,8 +18,6 @@
 
 # Working with text
         ripgrep
-        jq
-        csvkit
         less
         gnused
         gawk
@@ -43,10 +43,6 @@
         pciutils
         usbutils
         coreutils
-        comma
-
-# Fonts
-        nerd-fonts.fira-code
-        ];
+        comma; };
   };
 }

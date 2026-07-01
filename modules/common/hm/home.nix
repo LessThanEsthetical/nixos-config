@@ -1,13 +1,10 @@
-{ self, inputs, ... }:
+{ config, ... }:
 
 {
-  imports = [ inputs.home-manager.flakeModules.home-manager ];
-
-  flake.homeModules.hm = { config, pkgs, ... }: {
-    imports = with self.homeModules; [ list shell mpv niri ];
+  flake.homeModules.home = { config, pkgs, ... }: {
     home = {
-      username = "furina";
-      homeDirectory = "/home/furina";
+      #username = "${config.username}";
+      #homeDirectory = "/home/${config.username}";
       shell.enableZshIntegration = true;
       preferXdgDirectories = true;
     };
@@ -52,7 +49,10 @@
 
         createDirectories = true;
         setSessionVariables = true;
-        extraConfig = { BLENDER = "${config.home.homeDirectory}/Blender"; };
+        extraConfig = { 
+	BLENDER = "${config.home.homeDirectory}/Blender";
+	PROJECTS = "${config.home.homeDirectory}/Projects";
+	};
       };
     };
 
@@ -69,11 +69,6 @@
       nh = {
         enable = true;
 
-        flake = "/home/furina/nixos-conf";
-        clean = {
-          enable = false;
-          extraArgs = "--keep";
-        };
       };
 
       kitty = {
