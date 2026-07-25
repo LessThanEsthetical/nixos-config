@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.configuration = { config, pkgs, lib, settings, ... }: {
+  flake.nixosModules.configuration = { config, pkgs, lib, ... }: {
     hardware.facter.enable = true;
 
     nix = {
@@ -22,30 +22,16 @@
           PasswordAuthentication = false;
           KbdInteractiveAuthentication = false;
           PermitRootLogin = "no";
-	  AllowUsers = [ config.settings.username ];
         };
       };
     };
 
-    networking = {
-      hostName = "${config.settings.hostname}";
-      networkmanager.enable = true;
-      firewall.allowedTCPPorts = [ config.settings.services.openssh.ports ];
-    };
+    networking.networkmanager.enable = true;
 
-    time.timeZone = "${config.settings.timezone}";
+    time.timeZone = "Europe/Warsaw";
 
     programs.zsh.enable = true;
-    users = {
-      defaultUserShell = pkgs.zsh;
-
-      users.${config.settings.username} = {
-        isNormalUser = true;
-        extraGroups = [ "wheel" "networkmanager" "seat" ];
-        openssh.authorizedKeys.keys = [ config.settings.ssh-keys ];
-      };
-    };
-
+    
     security = {
       # Enable memory safe Rust written sudo
       sudo-rs = {

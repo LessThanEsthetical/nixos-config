@@ -3,8 +3,6 @@
 {
   flake.homeModules.home = { config, pkgs, ... }: {
     home = {
-      #username = "${config.username}";
-      #homeDirectory = "/home/${config.username}";
       shell.enableZshIntegration = true;
       preferXdgDirectories = true;
     };

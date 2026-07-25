@@ -1,11 +1,11 @@
 { inputs, ... }:
 
 {
-  imports = [ inputs.disko.flakeModules.default ];
   flake.diskoConfigurations.diskopc = { 
     disko.devices = {
       disk = {
         main = {
+	  imageSize = "50G";
           device = "/dev/disk/by-id/ata-QEMU_HARDDISK_QM00001";
           type = "disk";
           content = {

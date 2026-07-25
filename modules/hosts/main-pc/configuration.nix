@@ -1,11 +1,11 @@
-{ self, ... }:
+{ self, modulesPath, ... }:
 
 {
   flake.nixosModules.pc = { inputs, pkgs, modulesPath, ... }: {
 
     imports = [
-      self.nixosModules.configuration 
-      "${modulesPath}/profiles/qemu-guest.nix"
+     #self.nixosModules.configuration 
+      (modulesPath + "/profiles/qemu-guest.nix")
     ];
 
     boot = {
