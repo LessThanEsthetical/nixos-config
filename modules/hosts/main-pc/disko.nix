@@ -1,11 +1,11 @@
 { inputs, ... }:
-
 {
-  flake.diskoConfigurations.diskopc = { 
+  flake.diskoConfigurations.diskopc = {
+    imports = [ inputs.disko.nixosModules.disko ];
     disko.devices = {
       disk = {
         main = {
-	  imageSize = "50G";
+	  imageSize = "70G";
           device = "/dev/disk/by-id/ata-QEMU_HARDDISK_QM00001";
           type = "disk";
           content = {
@@ -13,7 +13,7 @@
             partitions = {
               ESP = {
                 name = "EF00";
-                size = "+1G";
+                size = "1G";
                 content = {
                   type = "filesystem";
                   format = "vfat";
@@ -21,11 +21,11 @@
                   mountOptions = [ "umask=0077" ];
                 };
               };
-              swap = {
-                size = "20G";
+              plainSwap = {
+                size = "4G";
                 content = {
                   type = "swap";
-                  randomEncryption = true;
+                  #randomEncryption = true;
                   resumeDevice = true;
                   discardPolicy = "both";
                 };

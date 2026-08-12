@@ -40,9 +40,7 @@
         escapeTime = 0;
         newSession = true;
 
-        plugins = with pkgs.tmuxPlugins; [
-          tokyo-night-tmux battery
-        ];
+        plugins = builtins.attrValues { inherit (pkgs.tmuxPlugins) tokyo-night-tmux battery; };
       };
     };
   };

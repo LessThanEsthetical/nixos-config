@@ -1,11 +1,11 @@
 {
   flake.homeModules.mpv = { config, pkgs, ... }: {
-    home.packages = [ pkgs.anime4k ];
+    #home.packages = [ pkgs.anime4k ];
 
     programs.mpv = {
       enable = true;
 
-      scripts = with pkgs.mpvScripts; [ modernz sponsorblock-minimal ];
+      scripts = builtins.attrValues { inherit (pkgs.mpvScripts) modernz sponsorblock-minimal; };
       config = {
         ao = "pipewire";
         deband = true;
