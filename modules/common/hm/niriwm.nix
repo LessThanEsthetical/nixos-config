@@ -10,7 +10,7 @@
     };
 
   wallpaper = pkgs.runCommand "wallpaper.png" { } ''
-    ${lib.getExe pkgs.oxipng} -o max -s --out=$out ${input}
+    ${lib.getExe' pkgs.libjxl "cjxl"} -d 0 -e 9 ${input} $out
   '';
   in
   {

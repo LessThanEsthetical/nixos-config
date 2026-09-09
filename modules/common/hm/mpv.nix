@@ -1,5 +1,5 @@
 {
-  flake.homeModules.mpv = { config, pkgs, ... }: {
+  flake.homeModules.mpv = { config, pkgs }: {
     #home.packages = [ pkgs.anime4k ];
 
     programs.mpv = {

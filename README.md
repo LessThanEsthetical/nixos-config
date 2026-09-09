@@ -1,9 +1,13 @@
 # WIP NixOS configuration
 
 ## How to try
-First, make sure to install `nix`\
-```sudo apt install nix # If you use Ubuntu or Debian```\
-```sudo pacman -S nix # If you use Arch Linux```\
+First, make sure to install `nix`
+```
+sudo apt install nix # If you're on Ubuntu or Debian
+```
+```
+sudo pacman -S nix # If you're on Arch Linux
+```
 ```
 sudo systemctl enable --now nix-daemon.service && \
 nix-channel --add https://channels.nixos.org/nixpkgs-unstable && \
@@ -11,19 +15,29 @@ nix-channel --update
 ```
 
 On non-NixOS distro (install Nix command first):\
-```nix run "github:LessThanEsthetical/nixos-config#nixosConfigurations.main-pc.config.system.build.vm"```\
+```
+nix run "github:LessThanEsthetical/nixos-config#nixosConfigurations.main-pc.config.system.build.vm"
+```
 On NixOS:\
-```nixos-rebuild build-vm --flake "github:LessThanEsthetical/nixos-config#main-pc"```\
+```
+nixos-rebuild build-vm --flake "github:LessThanEsthetical/nixos-config#main-pc"
+```
 Or you can try this for remote installation (you must have access to root):\
-```nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter ./facter.json --flake github:LessThanEsthetical/nixos-configuration#main-pc --target-host root@<Put IP here>```
+```
+nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter ./facter.json --flake github:LessThanEsthetical/nixos-configuration#main-pc --target-host root@<Put IP here>
+```
 
 ## Why
-I liked the idea of a reproducible, immutable, uncluttered and stable system, of which entire configuration can be stored inside Git repository.\
-Although, I still like Arch Linux that I've been using ~2.5 years as a general purpose OS.\
-Problems with Arch are:
-- There's a chance your next update will brick the system, albeit pretty small.
-- Next time you're going to reinstall Arch Linux, it'll be hard to reproduce.
-- You still need to separately update AUR packages, sometimes even rebuilding them.
+- Fully reproducible configuration. No clutter outside XDG user directories.
+- Immutable by default.
+- Atomic upgrades. If update is semi-broken, it gets discarded.
+- Entire configuration is declared by one language in Git repository. Easy to pull, install and configure with one-two commands.
+- Rollback feature makes it easy restore into previous state.
+- Nixpkgs unstable repository is [bigger than AUR](https://repology.org/repositories/graphs).
+- No dependency Hell.
+- Works in WSL and non-NixOS Linux distributions (within homeConfigurations flake).
+
+Pretty much enough to consider me switching from Arch Linux and learn Nix language.
 
 ## Structure
 ```
@@ -52,8 +66,8 @@ Problems with Arch are:
 │       ├── facter.json
 │       └── main-pc.nix
 └── users                       # User-specific modules
-    ├── yuuki.nix
-    └── john.nix
+    ├── john.nix
+    └── yuuki.nix
 ```
 
 ## Todo

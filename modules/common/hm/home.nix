@@ -1,5 +1,3 @@
-{ config, ... }:
-
 {
   flake.homeModules.home = { config, pkgs, ... }: {
     home = {
@@ -10,6 +8,7 @@
     services = { 
       gammastep = {
         enable = true;
+
         provider = "manual";
         latitude = 52.2;
         longitude = 21.0;

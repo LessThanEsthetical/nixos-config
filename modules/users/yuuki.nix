@@ -4,7 +4,7 @@ let
   username = "yuuki";
 in
 {
-  flake.nixosModules.user = { self, ... }: {
+  flake.nixosModules."${username}" = {
     imports = [ inputs.home-manager.nixosModules.home-manager ];
 
     users.users."${username}" = {

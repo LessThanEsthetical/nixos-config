@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   flake.homeModules.list = { pkgs, ... }: {
     home.packages = builtins.attrValues {
@@ -15,6 +13,7 @@
         eza
         tree
         fd
+        devenv
 
 # Working with text
         ripgrep

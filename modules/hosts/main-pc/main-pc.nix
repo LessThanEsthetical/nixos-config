@@ -8,7 +8,7 @@ in
     system = "x86_64-linux";
     modules = [
       self.nixosModules.pc
-      self.nixosModules.user
+      self.nixosModules.yuuki
       { networking.hostName = "${hostname}"; }
       self.diskoConfigurations.diskopc
     ];

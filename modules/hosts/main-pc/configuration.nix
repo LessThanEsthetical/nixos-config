@@ -1,7 +1,7 @@
-{ self, modulesPath, ... }:
+{ self, ... }:
 
 {
-  flake.nixosModules.pc = { inputs, pkgs, modulesPath, ... }: {
+  flake.nixosModules.pc = { pkgs, modulesPath, ... }: {
 
     imports = [
       self.nixosModules.configuration 

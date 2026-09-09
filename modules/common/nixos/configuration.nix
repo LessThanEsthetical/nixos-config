@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.configuration = { config, pkgs, lib, ... }: {
+  flake.nixosModules.configuration = { pkgs, ... }: {
     hardware.facter.enable = true;
 
     nix = {

@@ -1,7 +1,7 @@
 {
-  flake.homeModules.shell = { pkgs, ... }: {
+  flake.homeModules.shell = { pkgs, lib, osConfig, ... }: {
     programs = { 
-      zsh = {
+      zsh = lib.mkIf osConfig.programs.zsh.enable {
         enable = true;
 
         autosuggestion.enable = true;
