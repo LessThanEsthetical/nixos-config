@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   imports = [
     ./dunst.nix
     ./rofi.nix
@@ -8,10 +6,10 @@
   ];
 
   #wayland.windowManager.hyprland = {
-    #enable = true;
+  #enable = true;
 
-    #systemd.enableXdgAutostart = true;
-    #xwayland.enable = true;
+  #systemd.enableXdgAutostart = true;
+  #xwayland.enable = true;
   #};
 
   services = {

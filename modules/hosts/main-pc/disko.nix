@@ -1,11 +1,10 @@
-{ inputs, ... }:
-{
+{inputs, ...}: {
   flake.diskoConfigurations.diskopc = {
-    imports = [ inputs.disko.nixosModules.disko ];
+    imports = [inputs.disko.nixosModules.disko];
     disko.devices = {
       disk = {
         main = {
-	  imageSize = "70G";
+          imageSize = "70G";
           device = "/dev/disk/by-id/ata-QEMU_HARDDISK_QM00001";
           type = "disk";
           content = {
@@ -18,7 +17,7 @@
                   type = "filesystem";
                   format = "vfat";
                   mountpoint = "/boot";
-                  mountOptions = [ "umask=0077" ];
+                  mountOptions = ["umask=0077"];
                 };
               };
               plainSwap = {

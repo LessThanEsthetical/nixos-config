@@ -1,20 +1,21 @@
-{ inputs, ... }:
-
-{
-  flake.homeModules.niriwm = { config, pkgs, lib, ... }: 
-    let
+{inputs, ...}: {
+  flake.homeModules.niriwm = {
+    config,
+    pkgs,
+    lib,
+    ...
+  }: let
     input = builtins.fetchurl {
       url = "https://w.wallhaven.cc/full/e8/wallhaven-e8wdxl.png";
       name = "wallpaper.png";
       sha256 = "sha256-jravNZgpmi90qsivxLk+kaOsi0fgf6K//t3cL1c263w=";
     };
 
-  wallpaper = pkgs.runCommand "wallpaper.png" { } ''
-    ${lib.getExe' pkgs.libjxl "cjxl"} -d 0 -e 9 ${input} $out
-  '';
-  in
-  {
-    imports = [ inputs.niri.homeModules.niri ];
+    wallpaper = pkgs.runCommand "wallpaper.png" {} ''
+      ${lib.getExe' pkgs.libjxl "cjxl"} -d 0 -e 9 ${input} $out
+    '';
+  in {
+    imports = [inputs.niri.homeModules.niri];
     programs.niri = {
       enable = true;
 
@@ -22,8 +23,8 @@
       settings = {
         prefer-no-csd = true;
         screenshot-path = "${config.xdg.userDirs.pictures}/Screenshots/screenshot_%d-%m-%Y_%H-%M-%S.png";
-        spawn-at-startup = [ 
-        { argv = ["${lib.getExe pkgs.swaybg}" "-m" "fit" "-i" "${wallpaper}" ]; } 
+        spawn-at-startup = [
+          {argv = ["${lib.getExe pkgs.swaybg}" "-m" "fit" "-i" "${wallpaper}"];}
         ];
         binds = {
           "Mod+Shift+Slash".action.show-hotkey-overlay = [];
@@ -48,54 +49,54 @@
           "Mod+Print".action.screenshot-screen.show-pointer = false;
           "Mod+Ctrl+Print".action.screenshot-window = [];
 
-          "XF86AudioRaiseVolume" = { 
-            allow-when-locked = true; 
-            action.spawn = [ "${lib.getExe' pkgs.wireplumber "wpctl"}"  "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+" ];
-          };
-          "XF86AudioLowerVolume" = { 
+          "XF86AudioRaiseVolume" = {
             allow-when-locked = true;
-            action.spawn = [ "${lib.getExe' pkgs.wireplumber "wpctl"}" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-" ];
+            action.spawn = ["${lib.getExe' pkgs.wireplumber "wpctl"}" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"];
+          };
+          "XF86AudioLowerVolume" = {
+            allow-when-locked = true;
+            action.spawn = ["${lib.getExe' pkgs.wireplumber "wpctl"}" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"];
           };
           "XF86AudioMute" = {
             allow-when-locked = true;
-            action.spawn = [ "${lib.getExe' pkgs.wireplumber "wpctl"}" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle" ];
+            action.spawn = ["${lib.getExe' pkgs.wireplumber "wpctl"}" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"];
           };
           "XF86AudioMicMute" = {
             allow-when-locked = true;
-            action.spawn = ["${lib.getExe' pkgs.wireplumber "wpctl"}" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle" ];
+            action.spawn = ["${lib.getExe' pkgs.wireplumber "wpctl"}" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"];
           };
 
           "XF86AudioPlay" = {
             allow-when-locked = true;
-            action.spawn = [ "${lib.getExe pkgs.playerctl}" "play-pause" ];
+            action.spawn = ["${lib.getExe pkgs.playerctl}" "play-pause"];
           };
           "XF86AudioPause" = {
             allow-when-locked = true;
-            action.spawn = [ "${lib.getExe pkgs.playerctl}" "play-pause" ];
+            action.spawn = ["${lib.getExe pkgs.playerctl}" "play-pause"];
           };
           "XF86AudioStop" = {
             allow-when-locked = true;
-            action.spawn = [ "${lib.getExe pkgs.playerctl}" "stop" ];
+            action.spawn = ["${lib.getExe pkgs.playerctl}" "stop"];
           };
           "XF86AudioPrev" = {
             allow-when-locked = true;
-            action.spawn = [ "${lib.getExe pkgs.playerctl}" "previous" ];
+            action.spawn = ["${lib.getExe pkgs.playerctl}" "previous"];
           };
           "XF86AudioNext" = {
             allow-when-locked = true;
-            action.spawn = [ "${lib.getExe pkgs.playerctl}" "next" ];
+            action.spawn = ["${lib.getExe pkgs.playerctl}" "next"];
           };
 
           "XF86MonBrightnessUp" = {
             allow-when-locked = true;
-            action.spawn = [ "${lib.getExe pkgs.brightnessctl}" "-c" "backlight" "set" "+10%" ];
+            action.spawn = ["${lib.getExe pkgs.brightnessctl}" "-c" "backlight" "set" "+10%"];
           };
           "XF86MonBrightnessDown" = {
             allow-when-locked = true;
-            action.spawn = [ "${lib.getExe pkgs.brightnessctl}" "-c" "backlight" "set" "10%-" ];
+            action.spawn = ["${lib.getExe pkgs.brightnessctl}" "-c" "backlight" "set" "10%-"];
           };
 
-# Focusing on columns and windows
+          # Focusing on columns and windows
           "Mod+Left".action.focus-column-left = [];
           "Mod+H".action.focus-column-left = [];
           "Mod+WheelScrollLeft".action.focus-column-left = [];
@@ -111,7 +112,7 @@
           "Mod+Home".action.focus-column-first = [];
           "Mod+End".action.focus-column-last = [];
 
-# Moving columns and windows
+          # Moving columns and windows
           "Mod+Ctrl+Left".action.move-column-left = [];
           "Mod+Ctrl+H".action.move-column-left = [];
           "Mod+Ctrl+WheelScrollLeft".action.move-column-left = [];
@@ -127,7 +128,7 @@
           "Mod+Ctrl+Home".action.move-column-to-first = [];
           "Mod+Ctrl+End".action.move-column-to-last = [];
 
-# Focusing on monitors
+          # Focusing on monitors
           "Mod+Shift+Left".action.focus-monitor-left = [];
           "Mod+Shift+H".action.focus-monitor-left = [];
           "Mod+Shift+Down".action.focus-monitor-down = [];
@@ -137,7 +138,7 @@
           "Mod+Shift+Right".action.focus-monitor-right = [];
           "Mod+Shift+L".action.focus-monitor-right = [];
 
-# Moving columns to monitors
+          # Moving columns to monitors
           "Mod+Shift+Ctrl+Left".action.move-column-to-monitor-left = [];
           "Mod+Shift+Ctrl+H".action.move-column-to-monitor-left = [];
           "Mod+Shift+Ctrl+Down".action.move-column-to-monitor-down = [];
@@ -147,7 +148,7 @@
           "Mod+Shift+Ctrl+Right".action.move-column-to-monitor-right = [];
           "Mod+Shift+Ctrl+L".action.move-column-to-monitor-right = [];
 
-# Focusing on workspaces
+          # Focusing on workspaces
           "Mod+Page_Up".action.focus-workspace-up = [];
           "Mod+I".action.focus-workspace-up = [];
           "Mod+WheelScrollUp" = {
@@ -177,7 +178,7 @@
             action.move-column-to-workspace-down = [];
           };
 
-# Focus and move workspaces based on index from 1 to 9
+          # Focus and move workspaces based on index from 1 to 9
           "Mod+1".action.focus-workspace = 1;
           "Mod+2".action.focus-workspace = 2;
           "Mod+3".action.focus-workspace = 3;
@@ -225,7 +226,7 @@
     xdg.portal = {
       enable = true;
 
-      extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+      extraPortals = [pkgs.xdg-desktop-portal-gnome];
       xdgOpenUsePortal = true;
     };
   };

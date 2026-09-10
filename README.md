@@ -1,33 +1,39 @@
 # WIP NixOS configuration
 
 ## How to try
-First, make sure to install `nix`
-```
-sudo apt install nix # If you're on Ubuntu or Debian
-```
-```
-sudo pacman -S nix # If you're on Arch Linux
-```
-```
-sudo systemctl enable --now nix-daemon.service && \
-nix-channel --add https://channels.nixos.org/nixpkgs-unstable && \
-nix-channel --update
-```
 
-On non-NixOS distro (install Nix command first):\
-```
-nix run "github:LessThanEsthetical/nixos-config#nixosConfigurations.main-pc.config.system.build.vm"
-```
-On NixOS:\
-```
-nixos-rebuild build-vm --flake "github:LessThanEsthetical/nixos-config#main-pc"
-```
-Or you can try this for remote installation (you must have access to root):\
-```
-nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter ./facter.json --flake github:LessThanEsthetical/nixos-configuration#main-pc --target-host root@<Put IP here>
-```
+First, make sure to install `nix`
+
+    sudo apt install nix # If you're on Ubuntu or Debian
+    
+    sudo pacman -S nix # If you're on Arch Linux
+    
+    sudo systemctl enable --now nix-daemon.service && \
+    nix-channel --add https://channels.nixos.org/nixpkgs-unstable && \
+    nix-channel --update
+
+Enable Flakes and Nix command support:
+
+    sudo echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
+
+On non-NixOS distro (install Nix command first):
+
+    nix run "github:LessThanEsthetical/nixos-config#nixosConfigurations.main-pc.config.system.build.vm"
+
+On NixOS:
+
+    nixos-rebuild build-vm --flake "github:LessThanEsthetical/nixos-config#main-pc"
+
+Or you can try this for remote installation (you must have access to root):
+
+    nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter ./facter.json --flake github:LessThanEsthetical/nixos-configuration#main-pc --target-host root@<Put IP here>
+
+To try out my Home-manager configuration:
+
+    nix run home-manager/master -- init --switch "github:LessThanEsthetical/nixos-config#home"
 
 ## Why
+
 - Fully reproducible configuration. No clutter outside XDG user directories.
 - Immutable by default.
 - Atomic upgrades. If update is semi-broken, it gets discarded.
@@ -40,37 +46,37 @@ nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-
 Pretty much enough to consider me switching from Arch Linux and learn Nix language.
 
 ## Structure
-```
-./modules
-├── common                      # All separate modules specified here
-│   ├── hm                      # Home-manager modules
-│   │   ├── _firefox.nix
-│   │   ├── home.nix
-│   │   ├── _hyprland.nix
-│   │   ├── list.nix
-│   │   ├── mpv.nix
-│   │   ├── niriwm.nix
-│   │   ├── output.nix
-│   │   ├── shell.nix
-│   │   └── waybar.nix
-│   └── nixos                   # System-wide modules
-│       ├── configuration.nix
-│       ├── firewall.nix
-│       ├── pihole.nix
-│       ├── tailscale.nix
-│       └── unbound.nix
-├── hosts                       # Host-specific modules
-│   └── main-pc
-│       ├── configuration.nix
-│       ├── disko.nix
-│       ├── facter.json
-│       └── main-pc.nix
-└── users                       # User-specific modules
-    ├── john.nix
-    └── yuuki.nix
-```
+
+    ./modules
+    ├── common                      # All separate modules specified here
+    │   ├── hm                      # Home-manager modules
+    │   │   ├── _firefox.nix
+    │   │   ├── home.nix
+    │   │   ├── _hyprland.nix
+    │   │   ├── list.nix
+    │   │   ├── mpv.nix
+    │   │   ├── niriwm.nix
+    │   │   ├── output.nix
+    │   │   ├── shell.nix
+    │   │   └── waybar.nix
+    │   └── nixos                   # System-wide modules
+    │       ├── configuration.nix
+    │       ├── firewall.nix
+    │       ├── pihole.nix
+    │       ├── tailscale.nix
+    │       └── unbound.nix
+    ├── hosts                       # Host-specific modules
+    │   └── main-pc
+    │       ├── configuration.nix
+    │       ├── disko.nix
+    │       ├── facter.json
+    │       └── main-pc.nix
+    └── users                       # User-specific modules
+        ├── john.nix
+        └── yuuki.nix
 
 ## Todo
+
 - [ ] Finish Niri setup
   - Particulary touch onto bar (waybar), notifications (mako) and terminal emulator (Alacritty?)
   - Bring wallpapers
@@ -79,11 +85,11 @@ Pretty much enough to consider me switching from Arch Linux and learn Nix langua
   - It may be clunky, but at least it works
 - [ ] Finish Firefox setup
   - [ ] Fetch specific bookmarks
-  - [ ] Apply [arkenfox's user.js](https://github.com/HeitorAugustoLN/arkenfox-nix) + custom user_overrides.js
+  - [ ] Apply [arkenfox's user.js](https://github.com/HeitorAugustoLN/arkenfox-nix) + custom user\_overrides.js
   - [ ] Add uBlock Origin extension + custom filters and settings
 - [ ] Create configurations for servers as well
   - [ ] Raspberry Pi
-  - [ ] VPS 
+  - [ ] VPS
 - [ ] Somehow harden setup
   - [nix-mineral](https://github.com/cynicsketch/nix-mineral)?
 - [ ] Harden bootloading chain

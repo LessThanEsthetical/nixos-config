@@ -1,6 +1,11 @@
 {
-  flake.homeModules.shell = { pkgs, lib, osConfig, ... }: {
-    programs = { 
+  flake.homeModules.shell = {
+    pkgs,
+    lib,
+    osConfig,
+    ...
+  }: {
+    programs = {
       zsh = lib.mkIf osConfig.programs.zsh.enable {
         enable = true;
 
@@ -40,7 +45,7 @@
         escapeTime = 0;
         newSession = true;
 
-        plugins = builtins.attrValues { inherit (pkgs.tmuxPlugins) tokyo-night-tmux battery; };
+        plugins = builtins.attrValues {inherit (pkgs.tmuxPlugins) tokyo-night-tmux battery;};
       };
     };
   };

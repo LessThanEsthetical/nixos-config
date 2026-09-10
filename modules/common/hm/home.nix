@@ -1,11 +1,11 @@
 {
-  flake.homeModules.home = { config, pkgs, ... }: {
+  flake.homeModules.home = {config, ...}: {
     home = {
       shell.enableZshIntegration = true;
       preferXdgDirectories = true;
     };
 
-    services = { 
+    services = {
       gammastep = {
         enable = true;
 
@@ -29,9 +29,9 @@
       antialiasing = true;
 
       defaultFonts = {
-        emoji = [ "pkgs.font-awesome" ];
-        monospace = [ "pkgs.nerd-fonts.jetbrains-mono" ];
-        sansSerif = [ "pkgs.inter-nerdfont" ];
+        emoji = ["pkgs.font-awesome"];
+        monospace = ["pkgs.nerd-fonts.jetbrains-mono"];
+        sansSerif = ["pkgs.inter-nerdfont"];
       };
     };
 
@@ -41,15 +41,15 @@
       autostart.enable = true;
       mimeApps.enable = true;
       configFile."mimeapps.list".force = true;
-      userDirs = { 
+      userDirs = {
         enable = true;
 
         createDirectories = true;
         setSessionVariables = true;
-        extraConfig = { 
-	BLENDER = "${config.home.homeDirectory}/Blender";
-	PROJECTS = "${config.home.homeDirectory}/Projects";
-	};
+        extraConfig = {
+          BLENDER = "${config.home.homeDirectory}/Blender";
+          PROJECTS = "${config.home.homeDirectory}/Projects";
+        };
       };
     };
 
@@ -59,23 +59,22 @@
         settings.user = {
           name = "furina";
           email = "furina@example.com";
-# Change after setting on real VM
+          # Change after setting on real VM
         };
       };
 
       nh = {
         enable = true;
-
       };
 
       kitty = {
         enable = true;
 
-        enableGitIntegration = true;  
+        enableGitIntegration = true;
         themeFile = "tokyo_night_storm";
         shellIntegration.enableZshIntegration = true;
         font = {
-#package = [ pkgs.nerd-fonts.fira-code ];
+          #package = [ pkgs.nerd-fonts.fira-code ];
           name = "FiraCode Nerd Font Mono";
           size = 11;
         };
@@ -104,7 +103,7 @@
           o.smartindent = true
 
           vim.cmd("colorscheme industry")
-          '';
+        '';
       };
       yt-dlp = {
         enable = true;

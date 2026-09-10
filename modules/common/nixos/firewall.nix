@@ -10,7 +10,7 @@
       nftables = {
         enable = true;
 
-	flushRuleset = true;
+        flushRuleset = true;
       };
     };
   };

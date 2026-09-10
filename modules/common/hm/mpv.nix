@@ -1,11 +1,14 @@
 {
-  flake.homeModules.mpv = { config, pkgs }: {
+  flake.homeModules.mpv = {
+    config,
+    pkgs,
+  }: {
     #home.packages = [ pkgs.anime4k ];
 
     programs.mpv = {
       enable = true;
 
-      scripts = builtins.attrValues { inherit (pkgs.mpvScripts) modernz sponsorblock-minimal; };
+      scripts = builtins.attrValues {inherit (pkgs.mpvScripts) modernz sponsorblock-minimal;};
       config = {
         ao = "pipewire";
         deband = true;
@@ -16,7 +19,7 @@
         hr-seek = "absolute";
         scale-antiring = 0.6;
       };
-      bindings = { 
+      bindings = {
         WHEEL_UP = "add volume +5";
         WHEEL_DOWN = "add volume -5";
       };

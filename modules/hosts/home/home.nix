@@ -1,8 +1,11 @@
-{ inputs, self, lib, ... }:
-let
-  username = "astolfo";
-in
 {
+  inputs,
+  self,
+  lib,
+  ...
+}: let
+  username = "astolfo";
+in {
   flake.homeConfigurations.home = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
     modules = [
@@ -15,7 +18,8 @@ in
         home.homeDirectory = "/home/${username}";
         programs.home-manager.enable = true;
         programs.kitty.enable = lib.mkForce false;
+        targets.genericLinux.enable = true;
       }
-    ]; 
+    ];
   };
 }

@@ -1,39 +1,35 @@
 {
-  flake.homeModules.list = { pkgs, ... }: {
+  flake.homeModules.list = {pkgs, ...}: {
     home.packages = builtins.attrValues {
-    inherit (pkgs)
-# Tape archiving
+      inherit
+        (pkgs)
+        # Tape archiving
         zip
         xz
         gnutar
-
-# Working with files
+        # Working with files
         yazi
         fzf
         eza
         tree
         fd
         devenv
-
-# Working with text
+        # Working with text
         ripgrep
         less
         gnused
         gawk
-
-# Web utilites
+        # Web utilites
         curl
         wget
         aria2
         rsync
-
-# Network utilites
+        # Network utilites
         iproute2
         dnsutils
         socat
         nmap
-
-# System utilites
+        # System utilites
         btop
         file
         gnupg
@@ -42,6 +38,8 @@
         pciutils
         usbutils
         coreutils
-        comma; };
+        comma
+        ;
+    };
   };
 }
