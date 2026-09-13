@@ -1,11 +1,10 @@
 {inputs, ...}: {
-  flake.diskoConfigurations.diskopc = {
+  flake.diskoConfigurations.diskolaptop = {
     imports = [inputs.disko.nixosModules.disko];
     disko.devices = {
       disk = {
         main = {
-          imageSize = "70G";
-          device = "/dev/disk/by-id/ata-QEMU_HARDDISK_QM00001";
+          device = "/dev/disk/by-id/ata-SAMSUNG_MZNTD128HAGM-00000_S15YNYAD643939";
           type = "disk";
           content = {
             type = "gpt";
@@ -20,11 +19,10 @@
                   mountOptions = ["umask=0077"];
                 };
               };
-              plainSwap = {
+              swap = {
                 size = "4G";
                 content = {
                   type = "swap";
-                  #randomEncryption = true;
                   resumeDevice = true;
                   discardPolicy = "both";
                 };

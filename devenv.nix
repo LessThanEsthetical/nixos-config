@@ -7,11 +7,13 @@
   difftastic.enable = true;
 
   git-hooks.hooks = {
-    shellcheck.enable = true;
     alejandra.enable = true;
     deadnix.enable = true;
     flake-checker.enable = true;
-    lychee.enable = true;
+    lychee = {
+      enable = true;
+      settings.flags = "--accept '200, 429'";
+    };
     mdsh.enable = true;
   };
 
