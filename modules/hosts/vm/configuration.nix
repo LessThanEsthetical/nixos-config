@@ -5,7 +5,7 @@
     ...
   }: {
     imports = [
-      self.nixosModules.configuration
+      self.nixosModules.default
       self.nixosModules.firewall
       (modulesPath + "/profiles/qemu-guest.nix")
     ];

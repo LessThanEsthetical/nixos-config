@@ -2,13 +2,16 @@
   # Change username here
   username = "yuuki";
 in {
-  flake.nixosModules."${username}" = {
+  flake.nixosModules."${username}" = {pkgs, ...}: {
     imports = [inputs.home-manager.nixosModules.home-manager];
+
+    programs.zsh.enable = true;
 
     users.users."${username}" = {
       enable = true;
 
       isNormalUser = true;
+      shell = pkgs.zsh;
       extraGroups = ["wheel" "networkmanager"];
       hashedPassword = "$y$j9T$L5PIksAB7wo3y62iuk5c7.$Q6h4UDCPMYNdsbfmkCdulR6iQP69NdEZNcJ.AqWAxU1"; # A temporary set up password
       openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ2Ld4FLFrLbmwFVt3rmOAeaCgyNqV4eXFSJFzMZjVAU astolfo@moegoofy"];

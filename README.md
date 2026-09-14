@@ -2,46 +2,62 @@
 
 ## How to try
 
-First, make sure to install `nix`
+### Installation
+First, make sure to install `nix`  
+If you're on Ubuntu, or Debian, or their derivatives (e.g. Linux Mint, Zorin OS):
 
-    sudo apt install nix # If you're on Ubuntu or Debian
-    
-    sudo pacman -S nix # If you're on Arch Linux
-    
+    sudo apt install nix
+
+If you're on Arch Linux or its derivatives (e.g. EndeavourOS, CachyOS):
+
+    sudo pacman -S nix
+
+If you're on Fedora Linux or its derivatives (e.g. Asahi Linux, Bazzite):
+
+    sudo dnf install nix
+
+For the rest, refer to your distro's package manager instructions.  
+When installed, enable daemon and add nixpkgs-unstable channel:
+
     sudo systemctl enable --now nix-daemon.service && \
     nix-channel --add https://channels.nixos.org/nixpkgs-unstable && \
     nix-channel --update
 
-Enable Flakes and Nix command support:
+Finally, enable Flakes and Nix command support:
 
-    sudo echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
+    echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
 
-On non-NixOS distro (install Nix command first):
+### Variations
+
+To try vm flake on non-NixOS distro:
 
     nix run "github:LessThanEsthetical/nixos-config#nixosConfigurations.vm.config.system.build.vm"
 
-On NixOS:
+Same on NixOS:
 
     nixos-rebuild build-vm --flake "github:LessThanEsthetical/nixos-config#vm"
 
-Or you can try this for remote installation (you must have access to root):
+Or you can use [nixos-anywhere](https://github.com/nix-community/nixos-anywhere) for remote installation (you must have access to root via SSH):
 
-    nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter ./facter.json --flake "github:LessThanEsthetical/nixos-configuration#vm" --target-host root@<Put IP here>
+    nix run "github:nix-community/nixos-anywhere" -- --flake "github:LessThanEsthetical/nixos-configuration#vm" --target-host root@<Put IP here>
 
 To try out my Home-manager configuration:
 
-    nix run home-manager/master -- switch --flake "github:LessThanEsthetical/nixos-config#home"
+    nix run "home-manager/master" -- switch --flake "github:LessThanEsthetical/nixos-config#home"
 
 ## Why
 
-- Fully reproducible configuration. No clutter outside XDG user directories.
+- Fully reproducible configuration.
+- No clutter outside XDG user directories.
 - Immutable by default.
 - Atomic upgrades. If update is semi-broken, it gets discarded.
 - Entire configuration is declared by one language in Git repository. Easy to pull, install and configure with one-two commands.
-- Rollback feature makes it easy restore into previous state.
+- Rollback feature makes it easy restore into previous state and test new things without fear.
 - Nixpkgs unstable repository is [bigger than AUR](https://repology.org/repositories/graphs).
-- No dependency Hell.
-- Works in WSL and non-NixOS Linux distributions (within homeConfigurations flake).
+- No dependency hell.
+- Same exact configuration across different machines.
+- Custom shells for development.
+- Home-manager standalone flake works in WSL and non-NixOS Linux distributions.
 
 Pretty much enough to consider me switching from Arch Linux and learn Nix language.
 
@@ -59,20 +75,20 @@ Pretty much enough to consider me switching from Arch Linux and learn Nix langua
     │   │   ├── shell.nix
     │   │   └── waybar.nix
     │   └── nixos                     # System-wide modules
-    │       ├── configuration.nix
+    │       ├── default.nix
     │       ├── firewall.nix
     │       ├── pihole.nix
     │       ├── tailscale.nix
     │       └── unbound.nix
     ├── hosts                         # Dedicated modules for specific hosts
-    │   ├── home                      # WSL2 and non-NixOS Home-manager
+    │   ├── home                      # WSL2 and non-NixOS Home-manager standalone flake
     │   │   └── home.nix
-    │   ├── laptop                    # Laptop-specific, intended for testing
+    │   ├── laptop                    # Laptop-specific flake, intended for testing
     │   │   ├── configuration.nix
     │   │   ├── disko.nix
     │   │   ├── facter.json
     │   │   └── laptop.nix
-    │   └── vm                        # For VM in QEMU/KVM, default
+    │   └── vm                        # For VM in QEMU/KVM, default flake
     │       ├── configuration.nix
     │       ├── disko.nix
     │       ├── facter.json

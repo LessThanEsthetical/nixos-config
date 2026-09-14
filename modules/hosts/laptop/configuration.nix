@@ -1,7 +1,7 @@
 {self, ...}: {
   flake.nixosModules.laptop = {pkgs, ...}: {
     imports = [
-      self.nixosModules.configuration
+      self.nixosModules.default
       self.nixosModules.firewall
     ];
 

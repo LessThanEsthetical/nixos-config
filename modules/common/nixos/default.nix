@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.configuration = {pkgs, ...}: {
+  flake.nixosModules.default = {pkgs, ...}: {
     hardware.facter.enable = true;
 
     nix = {
@@ -30,7 +30,7 @@
 
     time.timeZone = "Europe/Warsaw";
 
-    programs.zsh.enable = true;
+    users.defaultUserShell = pkgs.bash;
 
     security = {
       # Enable memory safe Rust written sudo

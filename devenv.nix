@@ -12,7 +12,7 @@
     flake-checker.enable = true;
     lychee = {
       enable = true;
-      settings.flags = "--accept '200, 429'";
+      settings.flags = "--exclude 'answeroverflow.com' --exclude 'repology.org'";
     };
     mdsh.enable = true;
   };
