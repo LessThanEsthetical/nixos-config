@@ -63,6 +63,8 @@ Pretty much enough to consider me switching from Arch Linux and learn Nix langua
 
 ## Structure
 
+Output of `tree --gitignore --dirsfirst --noreport -- "./modules"`
+
     ./modules
     ├── common                        # Individual modules
     │   ├── hm                        # Home-manager modules
@@ -70,7 +72,7 @@ Pretty much enough to consider me switching from Arch Linux and learn Nix langua
     │   │   ├── home.nix
     │   │   ├── _hyprland.nix
     │   │   ├── list.nix
-    │   │   ├── mpv.nix
+    │   │   ├── media.nix
     │   │   ├── niriwm.nix
     │   │   ├── shell.nix
     │   │   └── waybar.nix
@@ -81,7 +83,7 @@ Pretty much enough to consider me switching from Arch Linux and learn Nix langua
     │       ├── tailscale.nix
     │       └── unbound.nix
     ├── hosts                         # Dedicated modules for specific hosts
-    │   ├── home                      # WSL2 and non-NixOS Home-manager standalone flake
+    │   ├── home                      # Home-manager standalone flake
     │   │   └── home.nix
     │   ├── laptop                    # Laptop-specific flake, intended for testing
     │   │   ├── configuration.nix
@@ -94,10 +96,9 @@ Pretty much enough to consider me switching from Arch Linux and learn Nix langua
     │       ├── facter.json
     │       └── vm.nix
     ├── users                         # Dedicated modules for users
-    │   ├── john.nix                  # Guest
-    │   └── yuuki.nix                 # Default
+    │   ├── defaultUser.nix
+    │   └── guestUser.nix
     └── output.nix                    # See: https://github.com/denful/den/discussions/317
-
 
 ## Todo
 
@@ -128,6 +129,7 @@ Pretty much enough to consider me switching from Arch Linux and learn Nix langua
   - ~Use swap as file instead of partition?~ Keep swap as partition due to Btrfs (with subvolumes) + LVM future plans.
   - Use [rustic](https://rustic.cli.rs/) with B2 as backup solution for my $HOME?
 - [ ] Use [sops-nix](https://github.com/Mic92/sops-nix) for passwords, API keys and personal text files
+  - Would be nice if [secretspec](https://github.com/cachix/secretspec) integration [was possible](https://github.com/cachix/secretspec/issues/65)
 - [ ] Use [NVF](https://github.com/NotAShelf/nvf) for ultimate Neovim configuration
   - Something similar to Emacs?
 - [ ] \(Optionally) Add KDE Plasma entry

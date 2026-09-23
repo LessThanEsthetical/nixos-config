@@ -2,14 +2,15 @@
   # Change username here
   username = "yuuki";
 in {
-  flake.nixosModules."${username}" = {pkgs, ...}: {
+  flake.nixosModules.defaultUser = {pkgs, ...}: {
     imports = [inputs.home-manager.nixosModules.home-manager];
 
     programs.zsh.enable = true;
 
-    users.users."${username}" = {
+    users.users.defaultUser = {
       enable = true;
 
+      name = "${username}";
       isNormalUser = true;
       shell = pkgs.zsh;
       extraGroups = ["wheel" "networkmanager"];
@@ -23,7 +24,7 @@ in {
       extraSpecialArgs = {inherit inputs;};
       backupFileExtension = "bak";
 
-      users."${username}" = {
+      users.defaultUser = {
         imports = builtins.attrValues {inherit (inputs.self.homeModules) home shell list niriwm waybar;};
         home = {
           homeDirectory = "/home/${username}";

@@ -8,6 +8,8 @@
         xz
         gnutar
         # Working with files
+        less
+        bat
         yazi
         fzf
         eza
@@ -16,7 +18,6 @@
         devenv
         # Working with text
         ripgrep
-        less
         gnused
         gawk
         # Web utilites

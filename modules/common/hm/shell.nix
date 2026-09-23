@@ -1,6 +1,7 @@
 {
   flake.homeModules.shell = {pkgs, ...}: {
     programs = {
+      bash.profileExtra = "exec zsh"; # Small dirty hack that makes Bash default accounts to switch to Zsh without root and chsh. Bash still usable and moreover, I'll keep it rather with "default" config.
       zsh = {
         enable = true;
 

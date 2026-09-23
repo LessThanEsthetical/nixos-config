@@ -1,38 +1,8 @@
 {
   flake.homeModules.home = {config, ...}: {
     home = {
-      shell.enableZshIntegration = true;
       preferXdgDirectories = true;
-    };
-
-    services = {
-      gammastep = {
-        enable = true;
-
-        provider = "manual";
-        latitude = 52.2;
-        longitude = 21.0;
-      };
-
-      cliphist = {
-        enable = true;
-
-        allowImages = true;
-      };
-    };
-
-    fonts.fontconfig = {
-      enable = true;
-
-      hinting = "slight";
-      subpixelRendering = "rgb";
-      antialiasing = true;
-
-      defaultFonts = {
-        emoji = ["pkgs.font-awesome"];
-        monospace = ["pkgs.nerd-fonts.jetbrains-mono"];
-        sansSerif = ["pkgs.inter-nerdfont"];
-      };
+      stateVersion = "26.05";
     };
 
     xdg = {
@@ -67,25 +37,6 @@
         enable = true;
       };
 
-      kitty = {
-        enable = true;
-
-        enableGitIntegration = true;
-        themeFile = "tokyo_night_storm";
-        shellIntegration.enableZshIntegration = true;
-        font = {
-          #package = [ pkgs.nerd-fonts.fira-code ];
-          name = "FiraCode Nerd Font Mono";
-          size = 11;
-        };
-        settings = {
-          cursor_shape = "underline";
-          cursor_trail = 1;
-          enable_audio_bell = "no";
-          background_opacity = 0.75;
-        };
-      };
-
       neovim = {
         enable = true;
 
@@ -105,34 +56,6 @@
           vim.cmd("colorscheme industry")
         '';
       };
-      yt-dlp = {
-        enable = true;
-
-        settings = {
-          paths = "home:${config.xdg.userDirs.download}/webvids";
-          output = "%(extractor)s/%(title)s [%(id)s].%(ext)s";
-
-          force-keyframes-at-cuts = true;
-          sponsorblock-mark = "all";
-          sponsorblock-remove = "sponsor";
-          external-downloader = "aria2c";
-          no-write-comments = true;
-          convert-thumbnails = "png";
-          sub-langs = "all";
-          sub-format = "best";
-          no-windows-filenames = true;
-
-          progress = true;
-          console-title = true;
-
-          embed-thumbnail = true;
-          embed-metadata = true;
-          embed-info-json = true;
-          embed-chapters = true;
-          embed-subs = true;
-        };
-      };
     };
-    home.stateVersion = "26.05";
   };
 }

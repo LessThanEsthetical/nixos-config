@@ -10,7 +10,7 @@ in {
     system = "x86_64-linux";
     modules = [
       self.nixosModules.laptop
-      self.nixosModules.yuuki
+      self.nixosModules.defaultUser
       {networking.hostName = "${hostname}";}
       self.diskoConfigurations.diskolaptop
     ];
