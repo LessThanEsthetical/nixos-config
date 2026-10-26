@@ -37,13 +37,24 @@ Same on NixOS:
 
     nixos-rebuild build-vm --flake "github:LessThanEsthetical/nixos-config#vm"
 
-Or you can use [nixos-anywhere](https://github.com/nix-community/nixos-anywhere) for remote installation (you must have access to root via SSH):
+To try out my Home-manager configuration (it expects “yuuki” as username):
+
+    nix run "home-manager/master" -- switch --flake "github:LessThanEsthetical/nixos-config#home"
+
+<details>
+<summary>Alternative ways</summary>
+
+### NH
+
+
+
+You can use [nixos-anywhere](https://github.com/nix-community/nixos-anywhere) for remote installation (unless you use NixOS installation image, you must have access to root via SSH with password or key set):
 
     nix run "github:nix-community/nixos-anywhere" -- --flake "github:LessThanEsthetical/nixos-configuration#vm" --target-host root@<Put IP here>
 
-To try out my Home-manager configuration:
 
-    nix run "home-manager/master" -- switch --flake "github:LessThanEsthetical/nixos-config#home"
+
+</details>
 
 ## Why
 
@@ -55,7 +66,7 @@ To try out my Home-manager configuration:
 - Rollback feature makes it easy restore into previous state and test new things without fear.
 - Nixpkgs unstable repository is [bigger than AUR](https://repology.org/repositories/graphs).
 - No dependency hell.
-- Same exact configuration across different machines.
+- Same configuration across different machines.
 - Custom shells for development.
 - Home-manager standalone flake works in WSL and non-NixOS Linux distributions.
 
@@ -126,8 +137,8 @@ Output of `tree --gitignore --dirsfirst --noreport -- "./modules"`
     - Backups with snapshots?
   - [ ] Use LVM-on-LUKS
   - [ ] [Impermanence](https://github.com/nix-community/impermanence) module sounds fun
-  - ~Use swap as file instead of partition?~ Keep swap as partition due to Btrfs (with subvolumes) + LVM future plans.
-  - Use [rustic](https://rustic.cli.rs/) with B2 as backup solution for my $HOME?
+  - ~Use swap as file instead of partition?~ Keep swap as partition due to Btrfs (with subvolumes) + LVM plans.
+  - Use [rustic](https://rustic.cli.rs/) + [rclone](https://rclone.org/) with B2 as backup solution for my $HOME?
 - [ ] Use [sops-nix](https://github.com/Mic92/sops-nix) for passwords, API keys and personal text files
   - Would be nice if [secretspec](https://github.com/cachix/secretspec) integration [was possible](https://github.com/cachix/secretspec/issues/65)
 - [ ] Use [NVF](https://github.com/NotAShelf/nvf) for ultimate Neovim configuration
