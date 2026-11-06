@@ -1,10 +1,10 @@
 {
   inputs,
-  config,
   self,
   ...
 }: let
-  username = config.users.users.defaultUser.name;
+  # Assume default username for WSL2
+  username = "nixos";
 in {
   flake.homeConfigurations.home = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;

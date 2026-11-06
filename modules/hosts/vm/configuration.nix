@@ -10,16 +10,7 @@
       (modulesPath + "/profiles/qemu-guest.nix")
     ];
 
-    boot = {
-      kernelPackages = pkgs.linuxPackages_zen;
-
-      loader.efi.canTouchEfiVariables = false;
-      loader.grub = {
-        enable = true;
-        device = "nodev";
-        efiSupport = true;
-      };
-    };
+    boot.kernelPackages = pkgs.linuxPackages_zen;
 
     hardware = {
       cpu.intel.updateMicrocode = true;
