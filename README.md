@@ -77,8 +77,8 @@ Pretty much enough to consider me switching from Arch Linux and learn Nix langua
 Output of `tree --gitignore --dirsfirst --noreport -- "./modules"`
 
     ./modules
-    ├── common                        # Individual modules
-    │   ├── hm                        # Home-manager modules
+    ├── common                      # Individual modules
+    │   ├── hm                      # Home-manager modules
     │   │   ├── _firefox.nix
     │   │   ├── home.nix
     │   │   ├── _hyprland.nix
@@ -86,30 +86,36 @@ Output of `tree --gitignore --dirsfirst --noreport -- "./modules"`
     │   │   ├── media.nix
     │   │   ├── niriwm.nix
     │   │   ├── shell.nix
+    │   │   ├── wallpapers.nix
     │   │   └── waybar.nix
-    │   └── nixos                     # System-wide modules
+    │   └── nixos                   # System-wide modules
     │       ├── default.nix
     │       ├── firewall.nix
     │       ├── pihole.nix
     │       ├── tailscale.nix
     │       └── unbound.nix
-    ├── hosts                         # Dedicated modules for specific hosts
-    │   ├── home                      # Home-manager standalone flake
+    ├── hosts                       # Dedicated modules for specific hosts
+    │   ├── home                    # Home-manager standalone #home flake
     │   │   └── home.nix
-    │   ├── laptop                    # Laptop-specific flake, intended for testing
+    │   ├── laptop2                 # Laptop-specific #laptop2 flake
     │   │   ├── configuration.nix
     │   │   ├── disko.nix
     │   │   ├── facter.json
-    │   │   └── laptop.nix
-    │   └── vm                        # For VM in QEMU/KVM, default flake
+    │   │   └── laptop2.nix
+    │   ├── laptopLegacy            # Laptop-specific #laptopLegacy flake, under maintenance
+    │   │   ├── configuration.nix
+    │   │   ├── disko.nix
+    │   │   ├── facter.json
+    │   │   └── laptopLegacy.nix
+    │   └── vm                      # VM #vm flake, for testing in QEMU/KVM
     │       ├── configuration.nix
     │       ├── disko.nix
     │       ├── facter.json
     │       └── vm.nix
-    ├── users                         # Dedicated modules for users
+    ├── users                       # Dedicated modules for users
     │   ├── defaultUser.nix
     │   └── guestUser.nix
-    └── output.nix                    # See: https://github.com/denful/den/discussions/317
+    └── output.nix                  # See: https://github.com/denful/den/discussions/317
 
 ## Todo
 
@@ -133,7 +139,7 @@ Output of `tree --gitignore --dirsfirst --noreport -- "./modules"`
     - [x] Use UEFI instead of BIOS
     - [Lanzaboote](https://github.com/nix-community/lanzaboote) for Secure Boot?
 - [ ] Implement [disko](https://github.com/nix-community/disko)
-  - [ ] Switch from ext4 to btrfs
+  - [x] Switch from ext4 to btrfs
     - Backups with snapshots?
   - [ ] Use LVM-on-LUKS
   - [ ] [Impermanence](https://github.com/nix-community/impermanence) module sounds fun
