@@ -1,6 +1,22 @@
 {
-  flake.nixosModules.default = {pkgs, ...}: {
+  flake.nixosModules.default = {
+    config,
+    lib,
+    pkgs,
+    ...
+  }: {
     hardware.facter.enable = true;
+    console.font = "${pkgs.terminus_font}/share/consolefonts/ter-120b.psf.gz"; # I don't particularly enjoy Times New Roman-like bitmap font
+    console.earlySetup = true;
+    i18n.defaultLocale = "en_US.UTF-8";
+
+    boot.loader.systemd-boot = {
+      enable = true;
+
+      editor = false;
+      memtest86.enable = true;
+      consoleMode = "max";
+    };
 
     nix = {
       package = pkgs.lixPackageSets.latest.lix;
@@ -24,6 +40,74 @@
           PermitRootLogin = "no";
         };
       };
+
+      fwupd.enable = true;
+
+      # I do really like Ly, but graphical-session.target and Waybar seems to be bugged with this
+      # See: https://github.com/nix-community/home-manager/issues/8317
+      #displayManager.ly = {
+      #  enable = true;
+
+      #  x11Support = false;
+      #  settings = {
+      #    battery_id = "BAT0";
+      #    auth_fails = 5;
+      #    bg = "0x001a1b26"; # Tokyo Night
+      #    fg = "0x00a0bdd7";
+      #    bigclock = "en";
+      #    bigclock_seconds = true;
+      #    blank_box = false;
+      #    clear_password = true;
+      #    full_color = true;
+      #    shell = true;
+      #    show_tty = true;
+      #    text_in_center = true;
+      #    show_password_key = "F7";
+      #    shutdown_key = "F1";
+      #    shutdown_cmd = "poweroff";
+      #    restart_key = "F2";
+      #    restart_cmd = "reboot";
+      #    default_input = "password";
+      #  };
+      #};
+
+      # In case of Lemurs, you can't "restart" Niri. You'll need to restart PC first + lacks shell login
+      # See: https://github.com/coastalwhite/lemurs/issues/254
+      # See: https://github.com/coastalwhite/lemurs/issues/225
+      #displayManager.lemurs.enable = true;
+
+      displayManager.enable = true;
+      greetd = {
+        enable = true;
+
+        useTextGreeter = true;
+        settings = {
+          terminal.vt = 1;
+          default_session = {
+            command = "${lib.getExe pkgs.tuigreet} --time --battery --user ${config.users.users.defaultUser.name} --remember --remember-user-session --asterisks";
+          };
+        };
+      };
+    };
+
+    # Shamelessly copied: https://github.com/sjcobb2022/nixos-config/raw/refs/heads/main/hosts/common/optional/greetd.nix
+    systemd.services.greetd.serviceConfig = {
+      Type = "idle";
+      StandardInput = "tty";
+      StandardOutput = "tty";
+      StandardError = "journal"; # Without this errors will spam on screen
+      # Without these bootlogs will spam on screen
+      TTYReset = true;
+      TTYVHangup = true;
+      TTYVTDisallocate = true;
+    };
+
+    programs.less = {
+      enable = true;
+
+      # Weird bug that without -R flag, less pager will output ANSI escape codes
+      # See: https://github.com/NixOS/nix/issues/8779
+      envVariables.LESS = "-R --quiet";
     };
 
     networking.networkmanager.enable = true;
