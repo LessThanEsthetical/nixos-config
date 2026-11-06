@@ -1,10 +1,10 @@
 {
   flake.homeModules.shell = {pkgs, ...}: {
     programs = {
-      bash.profileExtra = "exec zsh"; # Small dirty hack that makes Bash default accounts to switch to Zsh without root and chsh. Bash still usable and moreover, I'll keep it rather with "default" config.
       zsh = {
         enable = true;
 
+        autocd = true;
         autosuggestion.enable = true;
         enableCompletion = true;
         syntaxHighlighting.enable = true;
@@ -16,8 +16,28 @@
 
         shellAliases = {
           check = "fastfetch";
-          stfu = "shutdown -P 0";
+          ls = "eza --color=auto";
+          stfu = "systemctl poweroff";
           gs = "git status";
+        };
+
+        siteFunctions = {
+          # Create and navigate into directory immediately
+          mkcd = ''
+            mkdir -p -- "$1" && cd -P -- "$1"
+          '';
+          # Copy image from web as image
+          cpimg = ''
+            wget -qO- -- "$1" | wl-copy
+          '';
+          # yazi file manager thing
+          y = ''
+                   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+            yazi "$@" --cwd-file="$tmp"
+            IFS= read -r -d \'\' cwd < "$tmp"
+            [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+            rm -f -- "$tmp"
+          '';
         };
       };
 
@@ -42,6 +62,19 @@
         newSession = true;
 
         plugins = builtins.attrValues {inherit (pkgs.tmuxPlugins) tokyo-night-tmux battery;};
+      };
+
+      fzf = {
+        enable = true;
+
+        tmux.enableShellIntegration = true;
+        enableZshIntegration = true;
+      };
+
+      yazi = {
+        enable = true;
+
+        enableZshIntegration = true;
       };
     };
   };
