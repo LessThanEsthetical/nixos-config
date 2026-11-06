@@ -56,6 +56,8 @@
           vim.cmd("colorscheme industry")
         '';
       };
+      # HM's less is bugged somehow, ANSI escape codes over "systemctl status" and "man"
+      # Couldn't find an appropriate issue for this, unfortunately...
     };
   };
 }
