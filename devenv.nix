@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  packages = [pkgs.git pkgs.proselint];
+  packages = [pkgs.git pkgs.proselint pkgs.nh pkgs.nixos-install-tools];
 
   languages.nix.enable = true;
   languages.nix.lsp.enable = true;
