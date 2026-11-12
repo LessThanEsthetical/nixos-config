@@ -1,6 +1,7 @@
 {
   flake.nixosModules.firewall = {
     networking = {
+      iproute2.enable = true;
       firewall = {
         enable = true;
 

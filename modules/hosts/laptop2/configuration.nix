@@ -1,5 +1,9 @@
 {self, ...}: {
-  flake.nixosModules.laptop2 = {pkgs, ...}: {
+  flake.nixosModules.laptop2 = {
+    config,
+    pkgs,
+    ...
+  }: {
     imports = [
       self.nixosModules.default
       self.nixosModules.firewall
@@ -12,6 +16,13 @@
       cpu.intel.updateMicrocode = true;
       facter.reportPath = ./facter.json;
     };
+
+    networking = {
+      firewall.allowedTCPPorts = config.services.openssh.ports;
+      wireless.enable = true;
+    };
+
+    users.users.defaultUser.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIU8oDEnV8WMfILylKqQUBISsArg5VRoYMRcfaTzfcmJ astolfo@moegoofy"];
 
     services = {
       auto-cpufreq = {
@@ -38,6 +49,8 @@
       };
 
       libinput.enable = true;
+
+      openssh.ports = [2999];
     };
 
     security.rtkit.enable = true;

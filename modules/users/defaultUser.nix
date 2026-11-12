@@ -21,7 +21,6 @@ in {
       shell = pkgs.zsh;
       extraGroups = ["wheel" "networkmanager"];
       hashedPassword = "$y$j9T$L5PIksAB7wo3y62iuk5c7.$Q6h4UDCPMYNdsbfmkCdulR6iQP69NdEZNcJ.AqWAxU1"; # A temporarily set up password
-      openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDRrkjM25UEtZIdR8ald/L3kNMWZzAVAWUW/Lh50O2mI nixos"];
     };
 
     home-manager = {

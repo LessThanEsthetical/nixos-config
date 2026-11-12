@@ -10,12 +10,15 @@
     console.earlySetup = true;
     i18n.defaultLocale = "en_US.UTF-8";
 
-    boot.loader.systemd-boot = {
-      enable = true;
+    boot.loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot = {
+        enable = true;
 
-      editor = false;
-      memtest86.enable = true;
-      consoleMode = "max";
+        editor = false;
+        memtest86.enable = true;
+        consoleMode = "max";
+      };
     };
 
     nix = {
@@ -33,15 +36,17 @@
       openssh = {
         enable = true;
 
-        ports = [3620];
+        startWhenNeeded = true;
         settings = {
           PasswordAuthentication = false;
           KbdInteractiveAuthentication = false;
           PermitRootLogin = "no";
+          PrintMotd = true;
         };
       };
 
       fwupd.enable = true;
+      udisks2.enable = true;
 
       # I do really like Ly, but graphical-session.target and Waybar seems to be bugged with this
       # See: https://github.com/nix-community/home-manager/issues/8317
